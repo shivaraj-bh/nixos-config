@@ -46,9 +46,6 @@
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
   };
-  # Enable jenkins
-  services.jenkins.enable = true;
-  services.jenkins.withCLI = true;
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   
@@ -93,7 +90,6 @@
     description = "Shivaraj";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
     #  thunderbird
     ];
   };
@@ -103,21 +99,7 @@
   environment.shells = with pkgs; [ fish ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # Utils
-    bat
-    pciutils
-    glxinfo
-    lshw
-    gnumake
-    cachix
-    fd
-    wget
-    # Development
-    git
-    neovim
-    openjdk
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

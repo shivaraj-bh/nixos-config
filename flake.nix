@@ -46,7 +46,23 @@
             imports = [ ];
 	    home.packages = with pkgs;
 	    [
+	      # Browser
+	      firefox
+
+	      # Utils
+	      bat
+	      pciutils
+	      glxinfo
+	      lshw
+	      gnumake
+	      cachix
+	      fd
+	      wget
 	      grc
+	      
+	      # Development
+	      git
+	      neovim
 	    ];
             programs.git.enable = true;
             programs.starship.enable = true;
