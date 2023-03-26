@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./nix/cachix.nix
     ];
 
   # Bootloader.
@@ -17,7 +18,7 @@
   
   # If not present, the system hangs during boot
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "shivaraj-MacBookPro"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -26,7 +27,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
+  
+  services.openssh.enable = true;
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
@@ -44,10 +46,14 @@
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
   };
-
+  # Enable jenkins
+  services.jenkins.enable = true;
+  services.jenkins.withCLI = true;
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  
+  # Set the Video driver to use for display
+  services.xserver.videoDrivers = [ "nvidia" ];
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -94,15 +100,23 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  environment.shells = with pkgs; [ fish ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Utils
     bat
+    pciutils
+    glxinfo
+    lshw
+    gnumake
+    cachix
+    fd
+    wget
     # Development
     git
     neovim
+    openjdk
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
