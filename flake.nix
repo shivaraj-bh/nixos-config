@@ -55,6 +55,7 @@
 	      settings.shell.program ="${lib.getExe pkgs.fish}";
 	    };
 	    programs.fzf.enable = true;
+	    programs.lazygit.enable = true;
 	    programs.fish = {
 	      enable = true;
 	      interactiveShellInit = ''
@@ -62,7 +63,6 @@
 	      '';
 	      plugins = [
 	        { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-	        # Manually packaging and enable a plugin
 	        {
 	        name = "z";
 	        src = pkgs.fetchFromGitHub {
@@ -73,11 +73,6 @@
 	        };
 		}
 		{ name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
-		# need to add environment.shells in configuration.nix
-		# as $SHELL outputs bash otherwise, and some commands like `ga`
-		# will not work
-		# TODO: find a better way
-		{ name = "forgit"; src = pkgs.fishPlugins.forgit.src; }
 		{ name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
 	     ];
           };
